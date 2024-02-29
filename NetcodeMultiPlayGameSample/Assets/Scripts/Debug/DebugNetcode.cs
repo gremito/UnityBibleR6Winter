@@ -9,8 +9,11 @@ public class DebugNetcode : MonoBehaviour
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject plane;
 
+    [SerializeField] private ProjectSceneManager projectSceneManager;
+
     [SerializeField] private RectTransform connects;
     [SerializeField] private Button backBtn;
+    [SerializeField] private Button nextSceneBtn;
 
     void Start()
     {
@@ -20,6 +23,8 @@ public class DebugNetcode : MonoBehaviour
     private void InitConnect()
     {
         backBtn.onClick.AddListener(this.OnClickStopButton);
+        nextSceneBtn.onClick.AddListener(this.projectSceneManager.GoScene);
+
         SetConnects(true);
 
         if (NetworkManager.Singleton.IsServer)
@@ -39,6 +44,7 @@ public class DebugNetcode : MonoBehaviour
     {
         this.connects.gameObject.SetActive(active);
         this.backBtn.gameObject.SetActive(!active);
+        this.nextSceneBtn.gameObject.SetActive(!active);
     }
 
     public void StartHost()
